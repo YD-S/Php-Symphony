@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CampaignRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,15 +18,20 @@ class Campaign
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'The name cannot be blank.')]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'The start date cannot be blank.')]
     private ?\DateTimeImmutable $startDate = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: 'The end date cannot be blank.')]
+    #[Assert\GreaterThan(propertyPath: 'startDate', message: 'End date must be after start date')]
     private ?\DateTimeImmutable $endDate = null;
 
     /**
