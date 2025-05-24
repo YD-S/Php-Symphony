@@ -63,13 +63,25 @@ php bin/console app:create-campaign
 
 ## Listar campañas
 ```bash
-php bin/console app:list-campaigns [-s|--sort SORT] [-o|--order ORDER] [-l|--limit LIMIT] [--status STATUS]
+php bin/console app:list-campaigns [-s|--sort SORT] [-o|--order ORDER] [-l|--limit LIMIT]
 ```
 
 ## Asignar influencers a una campaña
 ```bash
 php bin/console app:assign-influencers <campaign_id> <influencer_id>
 ```
+
+## 🧪 Tests
+```bash
+# Esto ejecutará todos los tests definidos en la carpeta tests/.
+php bin/phpunit
+```
+
+Qué se prueba
+
+    - Creación de campañas desde consola
+
+    - Listado de campañas con opciones
 
 ## 📬 Contacto
 Desarrollado por Yash para evaluación técnica.
