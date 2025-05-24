@@ -28,7 +28,7 @@ Aplicación de consola Symfony para la gestión de campañas e influencers.
 
 ```bash
 # Clona o descarga el proyecto
-cd tumanager/
+cd Php-Symphony/
 
 # Instala las dependencias
 composer install
@@ -39,6 +39,8 @@ composer install
 ```dotrenv
 DATABASE_URL="postgresql://<user>:<password>@127.0.0.1:5432/db_name?serverVersion=15&charset=utf8"
 ```
+He usado PostgreSQL como base de datos, asegúrate de tenerla instalada y configurada.
+
 2. Crea y migra la base de datos
 ```bash
 php bin/console doctrine:database:create
