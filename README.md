@@ -57,3 +57,18 @@ php bin/console doctrine:migrations:migrate
 ##  🖥️ Comandos disponibles
 ```bash
 php bin/console app:create-campaign
+``
+
+## Listar campañas
+```bash
+php bin/console app:list-campaigns
+```
+
+## Asignar influencers a una campaña
+```bash
+php bin/console app:assign-influencers <campaign_id> <influencer_id>
+```
+
+## 📬 Contacto
+Desarrollado por Yash para evaluación técnica.
+Para cualquier duda, puedes contactar conmigo a través de GitHub o LinkedIn.
