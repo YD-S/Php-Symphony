@@ -8,9 +8,9 @@ Aplicación de consola Symfony para la gestión de campañas e influencers.
 
 - 📦 Crear campañas desde la consola
 - 📋 Listar campañas con detalles
-- 🌟 (Bonus) Asignar influencers a campañas
+- 🌟 Asignar influencers a campañas
 - 🧪 Base de datos PostgreSQL
-- ⚙️ Estructura limpia con Symfony Console + Doctrine
+- ⚙️ Symfony Console + Doctrine
 
 ---
 
@@ -35,9 +35,9 @@ composer install
 ```
 
 ## 🔧 Configuración
-1. Edita el archivo .env.local
+1. Edita el archivo .env
 ```dotrenv
-DATABASE_URL="postgresql://<user>:<password>@127.0.0.1:5432/db_name?serverVersion=15&charset=utf8"
+DATABASE_URL="postgresql://<user>:<password>@127.0.0.1:5432/db_name?serverVersion=14&charset=utf8"
 ```
 He usado PostgreSQL como base de datos, asegúrate de tenerla instalada y configurada.
 
@@ -63,7 +63,7 @@ php bin/console app:create-campaign
 
 ## Listar campañas
 ```bash
-php bin/console app:list-campaigns
+php bin/console app:list-campaigns [-s|--sort SORT] [-o|--order ORDER] [-l|--limit LIMIT] [--status STATUS]
 ```
 
 ## Asignar influencers a una campaña

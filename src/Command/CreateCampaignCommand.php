@@ -56,7 +56,7 @@ class CreateCampaignCommand extends Command
         return Command::SUCCESS;
     }
 
-    private function askName(SymfonyStyle $io): string
+    protected function askName(SymfonyStyle $io): string
     {
         return $io->ask('Campaign Name', null, function ($name) {
             if (empty($name)) {
@@ -66,12 +66,12 @@ class CreateCampaignCommand extends Command
         });
     }
 
-    private function askDescription(SymfonyStyle $io): ?string
+    protected function askDescription(SymfonyStyle $io): ?string
     {
         return $io->ask('Campaign Description (optional)', null);
     }
 
-    private function askDate(SymfonyStyle $io, string $prompt, ?\DateTimeInterface $minDate = null): \DateTimeImmutable
+    protected function askDate(SymfonyStyle $io, string $prompt, ?\DateTimeInterface $minDate = null): \DateTimeImmutable
     {
         return $io->ask($prompt . ' (YYYY-MM-DD HH:MM:SS)', null, function ($dateString) use ($prompt, $minDate) {
             if (empty($dateString)) {
@@ -88,7 +88,7 @@ class CreateCampaignCommand extends Command
         });
     }
 
-    private function checkDateOverlap(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate): void
+    protected function checkDateOverlap(\DateTimeImmutable $startDate, \DateTimeImmutable $endDate): void
     {
         $qb = $this->entityManager->createQueryBuilder();
 
@@ -105,7 +105,7 @@ class CreateCampaignCommand extends Command
 
         $overlappingCampaigns = $qb->getQuery()->getResult();
 
-        if (count($overlappingCampaigns) > 0) {
+        if ($overlappingCampaigns === null || count($overlappingCampaigns) > 0) {
             throw new \RuntimeException('There is already a campaign overlapping with those dates.');
         }
     }

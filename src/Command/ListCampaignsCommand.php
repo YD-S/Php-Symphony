@@ -33,10 +33,9 @@ class ListCampaignsCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('sort', 's', InputOption::VALUE_REQUIRED, 'Sort by field (id, name, start_date, end_date)', 'id')
+            ->addOption('sort', 's', InputOption::VALUE_REQUIRED, 'Sort by field (id, name)', 'id')
             ->addOption('order', 'o', InputOption::VALUE_REQUIRED, 'Sort order (asc/desc)', 'asc')
             ->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'Maximum number of campaigns to display', '100')
-            ->addOption('status', null, InputOption::VALUE_REQUIRED, 'Filter by campaign status (active/past/upcoming)', null)
         ;
     }
 
@@ -49,7 +48,6 @@ class ListCampaignsCommand extends Command
                 $input->getOption('sort'),
                 $input->getOption('order'),
                 (int)$input->getOption('limit'),
-                $input->getOption('status')
             );
 
             if (empty($campaigns)) {
@@ -78,18 +76,12 @@ class ListCampaignsCommand extends Command
         string $sort = 'id',
         string $order = 'asc',
         int $limit = 100,
-        ?string $status = null
     ): array {
         $qb = $this->campaignRepository->createQueryBuilder('c')
             ->select('c', 'COUNT(i.id) AS influencer_count')
             ->leftJoin('c.influencers', 'i')
             ->groupBy('c.id')
             ->setMaxResults($limit);
-
-        if ($status) {
-            $qb->andWhere('c.status = :status')
-                ->setParameter('status', $status);
-        }
 
         $qb->orderBy('c.' . $sort, $order);
 
